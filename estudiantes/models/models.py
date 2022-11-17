@@ -31,6 +31,6 @@ class profesores(models.Model):
     activo = fields.Boolean("Activo", required = True, default = True)
     asignatura = fields.Selection(selection = [("prog", "Programacion"), ("dis", "Diseño"), ("db", "Base de datos"), ("lm", "lenguaje de marcas")], required = True)
     descripcion = fields.Text("Descripcion", required=True)
-    fecha_Inscripcion = fields.Date("Fecha de Inscripcion", required = True, default = context_today)
+    fecha_Inscripcion = fields.Date("Fecha de Inscripcion", required = True, default = lambda self: fields.Date.today())
 
 

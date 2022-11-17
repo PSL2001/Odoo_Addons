@@ -1,0 +1,27 @@
+<odoo>
+<!-- Creamos el registro en vista de forma de arbol, model seria donde se van a registrar estos datos -->
+    <record id="view_tree_personal" model="ir.ui.view">
+        <!-- Nombre de la vista -->
+        <field name="name">view.tree.personal</field>
+        <!-- El modelo donde va a cojer los datos -->
+        <field name="model">personal.personal</field>
+        <field name="arch" type="xml"></field>
+        <tree>
+            <!-- Campos del modelo -->
+            <field name="name"/>
+            <field name="surname"/>
+            <field name="continente"/>
+        </tree>
+    </record>
+
+<!-- Acciones de ventana, que son llamadas en el menu -->
+<record id="action_view_personal" model="ir.actions.act_window">
+    <field name="name">Listado del personal</field>
+    <field name="res_model">personal.personal</field>
+    <!-- Vistas permitidas -->
+    <field name="view_mode">tree,form</field>
+</record>
+
+<!-- Creamos el menu -->
+<menuitem id="menu_personal" parent="" action="personal.action_view_personal"/>
+</odoo>

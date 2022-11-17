@@ -6,7 +6,7 @@
         Modulo que registra estudiantes""",
 
     'description': """
-        Modulo compuesto por 3 clases que permite registrar, modificar o borrar estudiantes
+        Modulo compuesto por 3 clases que permite registrar, modificar o borrar estudiantes, profesores y cursos
     """,
 
     'author': "Pablo Sánchez López",
@@ -23,7 +23,7 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
     ],

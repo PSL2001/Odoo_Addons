@@ -1,28 +1,50 @@
 <odoo>
   <data>
     <!-- explicit list view definition -->
-<!--
     <record model="ir.ui.view" id="estudiantes.list">
-      <field name="name">estudiantes list</field>
+      <field name="name">Datos del Estudiante</field>
       <field name="model">estudiantes.estudiantes</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
+          <field name="nombre"/>
+          <field name="apellidos"/>
+          <field name="edad"/>
+          <field name="activo"/>
+          <field name="fecha_Inicio"/>
+          <field name="cursos_id"/>
         </tree>
       </field>
     </record>
--->
+
+    <record model="ir.ui.view" id="profesores.list">
+      <field name="name">Datos del Profesorado</field>
+      <field name="model">profesores.estudiantes</field>
+      <field name="arch" type="xml">
+        <tree>
+          <group>
+            <field name="nombre"/>
+            <field name="apellidos"/>
+            <field name="activo"/>
+            <field name="asignatura"/>
+            <field name="descripcion"/>
+            <field name="fecha_Inscripcion"/>
+          </group>
+        </tree>
+      </field>
+    </record>
 
     <!-- actions opening views on models -->
-<!--
     <record model="ir.actions.act_window" id="estudiantes.action_window">
-      <field name="name">estudiantes window</field>
+      <field name="name">Listado de Estudiantes</field>
       <field name="res_model">estudiantes.estudiantes</field>
       <field name="view_mode">tree,form</field>
     </record>
--->
+
+    <record model="ir.actions.act_window" id="profesores.action_window">
+      <field name="name">Listado de profesores</field>
+      <field name="res_model">profesores.estudiantes</field>
+      <field name="view_mode">tree,form</field>
+    </record>
 
     <!-- server action to the one above -->
 <!--
@@ -41,20 +63,15 @@
 -->
 
     <!-- Top menu item -->
-<!--
-    <menuitem name="estudiantes" id="estudiantes.menu_root"/>
--->
+    <menuitem name="Estudiantes" id="estudiantes.menu_root"/>
     <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="estudiantes.menu_1" parent="estudiantes.menu_root"/>
-    <menuitem name="Menu 2" id="estudiantes.menu_2" parent="estudiantes.menu_root"/>
--->
+    <menuitem name="Menu Estudiantes" id="estudiantes.menu_estudiantes" parent="estudiantes.menu_root"/>
+    <menuitem name="Menu Profesores" id="estudiantes.menu_profesores" parent="estudiantes.menu_root"/>
     <!-- actions -->
-<!--
-    <menuitem name="List" id="estudiantes.menu_1_list" parent="estudiantes.menu_1"
+
+    <menuitem name="Listado Alumnos" id="estudiantes.menu_1_list" parent="estudiantes.menu_1"
               action="estudiantes.action_window"/>
-    <menuitem name="Server to list" id="estudiantes" parent="estudiantes.menu_2"
-              action="estudiantes.action_server"/>
--->
+    <menuitem name="Listado Profesores" id="estudiantes.menu_profesores_list" parent="estudiantes.menu_profesores"
+              action="profesores.action_server"/>
   </data>
 </odoo>

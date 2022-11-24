@@ -14,6 +14,7 @@ class estudiantes(models.Model):
     fecha_Inicio = fields.Date("Fecha de inicio de curso", required = True)
     #curso = fields.Selection(selection = [("dam", "Desarrollo de Aplicaciones Multiplataforma"), ("daw", "Desarrollo de Aplicaciones Web"), ("cev", "Curso de Especializacion de Videojuegos")])
     cursos_id = fields.One2many('cursos.estudiantes', 'estudiantes_id', string="Curso")
+    profesores_id = fields.Many2many('profesores.estudiantes', string="Profesores")
 
     #value2 = fields.Float(compute="_value_pc", store=True)
     #description = fields.Text()
@@ -33,6 +34,7 @@ class profesores(models.Model):
     asignatura = fields.Selection(selection = [("prog", "Programacion"), ("dis", "Diseño"), ("db", "Base de datos"), ("lm", "lenguaje de marcas")], required = True)
     descripcion = fields.Text("Descripcion", required=True)
     fecha_Inscripcion = fields.Date("Fecha de Inscripcion", required = True, default = lambda self: fields.Date.today())
+    estudiantes_id = fields.Many2many('estudiantes.estudiantes', string="Estudiantes")
 
 class cursos(models.Model):
     _name = 'cursos.estudiantes'

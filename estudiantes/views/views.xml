@@ -22,17 +22,36 @@
       <field name="model">estudiantes.estudiantes</field>
       <field name="arch" type="xml">
         <form>
-          <field name="nombre" string="Nombre del alumno"/>
-          <field name="apellidos" string="Apellidos del Alumno"/>
-          <field name="edad" string="Edad del alumno"/>
-          <field name="activo" string="¿Sigue el alumno en el centro?"/>
-          <field name="fecha_Inicio" string="Fecha de comienzo del alumno"/>
-          <field name="cursos_id" string="Cursos del Alumno"/>
-          <field name="profesores_id" string="Profesores del Alumno"/>
+          <group>
+            <field name="nombre" string="Nombre del alumno" style="color:red;"/>
+            <field name="apellidos" string="Apellidos del Alumno"/>
+            <field name="edad" string="Edad del alumno"/>
+            <field name="activo" string="¿Sigue el alumno en el centro?"/>
+            <field name="fecha_Inicio" string="Fecha de comienzo del alumno"/>
+            <field name="cursos_id" string="Cursos del Alumno" style="width:30%;"/>
+            <field name="profesores_id" string="Profesores del Alumno" style="width:30%;"/>
+          </group>
         </form>
       </field>
     </record>
 
+    <record model="ir.ui.view" id="profesores_estudiantes.form">
+      <field name="name">Datos del Profesorado</field>
+      <field name="model">profesores.estudiantes</field>
+      <field name="arch" type="xml">
+        <form>
+          <field name="nombre"/>
+          <field name="apellidos"/>
+          <field name="activo"/>
+          <field name="asignatura"/>
+          <field name="descripcion"/>
+          <field name="fecha_Inscripcion"/>
+          <group>
+            <field name="estudiantes_id"/>
+          </group>
+        </form>
+      </field>
+    </record>
 
 
     <!-- actions opening views on models -->

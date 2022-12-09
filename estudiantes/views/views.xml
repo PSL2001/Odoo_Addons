@@ -35,24 +35,6 @@
       </field>
     </record>
 
-    <record model="ir.ui.view" id="profesores_estudiantes.form">
-      <field name="name">Datos del Profesorado</field>
-      <field name="model">profesores.estudiantes</field>
-      <field name="arch" type="xml">
-        <form>
-          <field name="nombre"/>
-          <field name="apellidos"/>
-          <field name="activo"/>
-          <field name="asignatura"/>
-          <field name="descripcion"/>
-          <field name="fecha_Inscripcion"/>
-          <group>
-            <field name="estudiantes_id"/>
-          </group>
-        </form>
-      </field>
-    </record>
-
 
     <!-- actions opening views on models -->
     <record model="ir.actions.act_window" id="estudiantes.action_window">

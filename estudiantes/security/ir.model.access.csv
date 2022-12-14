@@ -1,4 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_estudiantes_estudiantes,estudiantes.estudiantes,model_estudiantes_estudiantes,base.group_user,1,1,1,1
-access_profesores_estudiantes,profesores.estudiantes,model_profesores_estudiantes,base.group_user,1,1,1,1
-access_cursos_estudiantes,cursos.estudiantes,model_cursos_estudiantes,base.group_user,1,1,1,1
+access_estudiantes_alumnos,estudiantes.alumnos,model_estudiantes_alumnos,base.group_user,1,1,1,1
+access_estudiantes_profesores,estudiantes.profesores,model_estudiantes_profesores,base.group_user,1,1,1,1
+access_estudiantes_cursos,estudiantes.cursos,model_estudiantes_cursos,base.group_user,1,1,1,1

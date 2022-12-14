@@ -1,49 +1,180 @@
 <odoo>
   <data>
-    <!-- explicit list view definition -->
-    <record model="ir.ui.view" id="estudiantes.list">
-      <field name="name">Datos del Estudiante</field>
-      <field name="model">estudiantes.estudiantes</field>
+    <!-- Vista en arbol de estudiantes.alumnos -->
+    <record model="ir.ui.view" id="estudiantes.tree">
+      <field name="name">Listado de Estudiantes</field>
+      <field name="model">estudiantes.alumnos</field>
       <field name="arch" type="xml">
         <tree>
-          <field name="nombre"/>
-          <field name="apellidos"/>
-          <field name="edad"/>
-          <field name="activo"/>
-          <field name="fecha_Inicio"/>
-          <field name="cursos_id"/>
-          <field name="profesores_id"/>
+          <field name="nombre" string="Nombre del alumno"/>
+          <field name="apellidos" string="Apellidos del Alumno"/>
+          <field name="edad" string="Edad del alumno"/>
+          <field name="activo" string="¿Sigue el alumno en el centro?"/>
+          <field name="fecha_Inicio" string="Fecha de comienzo del alumno"/>
+          <field name="curso" string="Cursos del Alumno"/>
         </tree>
       </field>
     </record>
 
+
+    <!-- Vista en formulario de estudiantes.alumnos -->
     <record model="ir.ui.view" id="estudiantes.form">
-      <field name="name">Datos del Estudiante</field>
-      <field name="model">estudiantes.estudiantes</field>
+      <field name="name">Formulario de Estudiantes</field>
+      <field name="model">estudiantes.alumnos</field>
       <field name="arch" type="xml">
         <form>
-          <group>
-            <field name="nombre" string="Nombre del alumno" style="color:red;"/>
-            <field name="apellidos" string="Apellidos del Alumno"/>
-            <field name="edad" string="Edad del alumno"/>
-            <field name="activo" string="¿Sigue el alumno en el centro?"/>
-            <field name="fecha_Inicio" string="Fecha de comienzo del alumno"/>
-            <field name="cursos_id" string="Cursos del Alumno" style="width:30%;"/>
-            <field name="profesores_id" string="Profesores del Alumno" style="width:30%;"/>
-          </group>
+          <sheet>
+            <group>
+              <group>
+                <field name="nombre" string="Nombre del alumno" style="color:red;"/>
+                <field name="apellidos" string="Apellidos del Alumno"/>
+                <field name="edad" string="Edad del alumno"/>
+                <field name="activo" string="¿Sigue el alumno en el centro?"/>
+                <field name="fecha_Inicio" string="Fecha de comienzo del alumno"/>
+                <field name="curso" string="Cursos del Alumno" style="width:30%;"/>
+              </group>
+            </group>
+          </sheet>
         </form>
       </field>
     </record>
+
+    <!-- Vista search de alumnos -->
+    <record model="ir.ui.view" id="estudiantes.search">
+      <field name="name">Search Estudiantes</field>
+      <field name="model">estudiantes.alumnos</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="nombre" string="Nombre del alumno"/>
+          <field name="apellidos" string="Apellidos del Alumno"/>
+          <field name="edad" string="Edad del alumno"/>
+          <field name="activo" string="¿Sigue el alumno en el centro?"/>
+          <field name="fecha_Inicio" string="Fecha de comienzo del alumno"/>
+          <field name="curso" string="Cursos del Alumno"/>
+          <!-- Filtro para buscar por activo -->
+          <filter string="Activo" name="activo" domain="[('activo', '=', True)]"/>
+          <!-- Filtro para buscar por el nombre de curso "Desarrollo de aplicaciones web" -->
+          <filter string="Desarrollo de aplicaciones web" name="curso" domain="[('curso', '=', 'daw')]"/>
+        </search>
+      </field>
+    </record>
+
 
 
     <!-- actions opening views on models -->
     <record model="ir.actions.act_window" id="estudiantes.action_window">
       <field name="name">Listado de Estudiantes</field>
-      <field name="res_model">estudiantes.estudiantes</field>
+      <field name="res_model">estudiantes.alumnos</field>
       <field name="view_mode">tree,form</field>
     </record>
 
+    <!-- Vista en arbol de profesores -->
+    <record model="ir.ui.view" id="estudiantes.tree_profesores">
+      <field name="name">Listado de Profesores</field>
+      <field name="model">estudiantes.profesores</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nombre" string="Nombre del profesor"/>
+          <field name="apellidos" string="Apellidos del profesor"/>
+          <field name="activo" string="¿Sigue el profesor en el centro?"/>
+          <field name="asignatura" string="Asignatura del profesor"/>
+          <field name="descripcion" string="Descripción de la asignatura del profesor"/>
+          <field name="fecha_Inscripcion" string="Fecha de inscripción del profesor"/>
+        </tree>
+      </field>
+    </record>
 
+    <!-- Vista de formulario para profesores -->
+    <record model="ir.ui.view" id="estudiantes.form_profesores">
+      <field name="name">Formulario de Profesores</field>
+      <field name="model">estudiantes.profesores</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+              <group style="width:30%;">
+                <field name="nombre" string="Nombre del profesor"/>
+                <field name="apellidos" string="Apellidos del profesor"/>
+                <field name="activo" string="¿Sigue el profesor en el centro?" style="background-color:green;"/>
+                <field name="asignatura" string="Asignatura del profesor"/>
+                <field name="descripcion" string="Descripción de la asignatura del profesor"/>
+                <field name="fecha_Inscripcion" string="Fecha de inscripción del profesor"/>
+              </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Vista search de profesores -->
+    <record model="ir.ui.view" id="estudiantes.search_profesores">
+      <field name="name">Search Profesores</field>
+      <field name="model">estudiantes.profesores</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="nombre" string="Nombre del profesor"/>
+          <field name="apellidos" string="Apellidos del profesor"/>
+          <field name="activo" string="¿Sigue el profesor en el centro?"/>
+          <field name="asignatura" string="Asignatura del profesor"/>
+          <field name="descripcion" string="Descripción de la asignatura del profesor"/>
+          <field name="fecha_Inscripcion" string="Fecha de inscripción del profesor"/>
+          <!-- Filtro para buscar profesores que estan activos y dan la asignatura programacion -->
+          <filter string="Profesores activos y que dan la asignatura programacion" name="activo" domain="[('activo', '=', True),('asignatura', '=', 'prog')]"/>
+          <!-- Filtro para buscar profesores que o no estan activos o tienen una fecha menor a hoy -->
+          <filter string="Profesores no activos o con fecha de inscripcion menor a hoy" name="activo" domain="['|', ('activo', '=', False),('fecha_Inscripcion', '&lt;', time.strftime('%Y-%m-%d'))]"/>
+        </search>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="estudiantes.action_window_profesores">
+      <field name="name">Listado de Profesores</field>
+      <field name="res_model">estudiantes.profesores</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Vista en arbol de cursos -->
+    <record model="ir.ui.view" id="estudiantes.tree_cursos">
+      <field name="name">Listado de Cursos</field>
+      <field name="model">estudiantes.cursos</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="nombre" string="Nombre del curso"/>
+          <field name="descripcion" string="Descripción del curso"/>
+          <field name="fecha_creacion" string="Fecha de creación del curso"/>
+          <field name="activo" string="¿Sigue el curso en el centro?"/>
+          <field name="precio" string="Precio del curso"/>
+          <field name="dias" string="Días totales del curso"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Vista de formulario para cursos -->
+    <record model="ir.ui.view" id="estudiantes.form_cursos">
+      <field name="name">Formulario de Cursos</field>
+      <field name="model">estudiantes.cursos</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+              <group style="width:30%;">
+                <field name="nombre" string="Nombre del curso" style="color:green;"/>
+                <field name="descripcion" string="Descripción del curso"/>
+              </group>
+              <group style="width:30%; float:right;">
+                <field name="fecha_creacion" string="Fecha de creación del curso"/>
+                <field name="activo" string="¿Sigue el curso en el centro?"/>
+                <field name="precio" string="Precio del curso"/>
+                <field name="dias" string="Días totales del curso"/>
+              </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="estudiantes.action_window_cursos">
+      <field name="name">Listado de Cursos</field>
+      <field name="res_model">estudiantes.cursos</field>
+      <field name="view_mode">tree,form</field>
+    </record>
 
     <!-- server action to the one above -->
     <!--
@@ -69,6 +200,8 @@
     <!-- actions -->
 
     <menuitem name="Listado Alumnos" id="estudiantes.menu_1_list" parent="estudiantes.menu_estudiantes" action="estudiantes.action_window"/>
+    <menuitem name="Listado Profesores" id="estudiantes.menu_2_list" parent="estudiantes.menu_estudiantes" action="estudiantes.action_window_profesores"/>
+    <menuitem name="Listado Cursos" id="estudiantes.menu_3_list" parent="estudiantes.menu_estudiantes" action="estudiantes.action_window_cursos"/>
 
   </data>
 </odoo>

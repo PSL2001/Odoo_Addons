@@ -3,18 +3,16 @@
 from odoo import models, fields, api
 
 
-class estudiantes(models.Model):
-    _name = 'estudiantes.estudiantes'
-    _description = 'estudiantes.estudiantes'
+class alumnos(models.Model):
+    _name = 'estudiantes.alumnos'
+    _description = 'estudiantes.alumnos'
 
     nombre = fields.Char("Nombre", help="Introduce el nombre", required=True, size = 20)
     apellidos = fields.Char("Apellidos", help="Introduce tus apellidos", required=True, size=40)
     edad = fields.Integer("Edad", required = True)
     activo = fields.Boolean("Activo", required = True, default = True)
     fecha_Inicio = fields.Date("Fecha de inicio de curso", required = True)
-    #curso = fields.Selection(selection = [("dam", "Desarrollo de Aplicaciones Multiplataforma"), ("daw", "Desarrollo de Aplicaciones Web"), ("cev", "Curso de Especializacion de Videojuegos")])
-    cursos_id = fields.One2many('cursos.estudiantes', 'estudiantes_id', string="Curso")
-    profesores_id = fields.Many2many('profesores.estudiantes', string="Profesores")
+    curso = fields.Selection(selection = [("dam", "Desarrollo de Aplicaciones Multiplataforma"), ("daw", "Desarrollo de Aplicaciones Web"), ("cev", "Curso de Especializacion de Videojuegos")])
 
     #value2 = fields.Float(compute="_value_pc", store=True)
     #description = fields.Text()
@@ -25,8 +23,8 @@ class estudiantes(models.Model):
     #        record.value2 = float(record.value) / 100
 
 class profesores(models.Model):
-    _name = 'profesores.estudiantes'
-    _description = 'profesores.estudiantes'
+    _name = 'estudiantes.profesores'
+    _description = 'estudiantes.profesores'
 
     nombre = fields.Char("Nombre", help="Introduce el nombre", required=True, size = 20)
     apellidos = fields.Char("Apellidos", help="Introduce tus apellidos", required=True, size=40)
@@ -34,16 +32,22 @@ class profesores(models.Model):
     asignatura = fields.Selection(selection = [("prog", "Programacion"), ("dis", "Diseño"), ("db", "Base de datos"), ("lm", "lenguaje de marcas")], required = True)
     descripcion = fields.Text("Descripcion", required=True)
     fecha_Inscripcion = fields.Date("Fecha de Inscripcion", required = True, default = lambda self: fields.Date.today())
-    estudiantes_id = fields.Many2many('estudiantes.estudiantes', string="Estudiantes")
-
+   
 class cursos(models.Model):
-    _name = 'cursos.estudiantes'
-    _description = 'cursos.estudiantes'
+    _name = 'estudiantes.cursos'
+    _description = 'estudiantes.cursos'
 
     nombre = fields.Char("Nombre", help="Introduce el nombre", required=True, size = 20)
     descripcion = fields.Text('Descripcion')
     fecha_creacion = fields.Date("Fecha de Creacion", required = True, default = lambda self: fields.Date.today())
-    activo = activo = fields.Boolean("Activo", required = True, default = True)
-    estudiantes_id = fields.Many2one('estudiantes.estudiantes', 'Estudiantes en el curso', ondelelete='cascade', required=True)
+    activo = fields.Boolean("Activo", required = True, default = True)
+    precio = fields.Float("Precio", required = True)
+    #Campo que calcula el total de dias que lleva existiendo el curso desde su fecha de creacion
+    dias = fields.Integer("Dias", compute = "_value_pc", store = True)
+
+    @api.depends('fecha_creacion')
+    def _value_pc(self):
+        for record in self:
+            record.dias = (fields.Date.today() - record.fecha_creacion).days
     
 

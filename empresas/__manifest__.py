@@ -3,14 +3,13 @@
     'name': "empresas",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+    Modulo para la gestion de empresas""",
 
     'description': """
-        Long description of module's purpose
+        Modulo para la gestion de empresas, clientes y empleados de un negocio, con la posibilidad de crear, editar y eliminar empresas, clientes y empleados.
     """,
 
-    'author': "My Company",
+    'author': "Pablo Sánchez López",
     'website': "http://www.yourcompany.com",
 
     # Categories can be used to filter modules in modules listing
@@ -24,9 +23,11 @@
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        #Reportes
+        'reports/report_company.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

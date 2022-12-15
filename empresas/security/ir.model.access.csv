@@ -1,2 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_empresas_empresas,empresas.empresas,model_empresas_empresas,base.group_user,1,1,1,1
+access_empresas_company,empresas.company,model_empresas_company,base.group_user,1,1,1,1
+access_empresas_empleado,empresas.empleado,model_empresas_empleado,base.group_user,1,1,1,1
+access_empresas_cliente,empresas.cliente,model_empresas_cliente,base.group_user,1,1,1,1

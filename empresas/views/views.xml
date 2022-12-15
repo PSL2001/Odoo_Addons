@@ -1,31 +1,264 @@
 <odoo>
   <data>
-    <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="empresas.list">
-      <field name="name">empresas list</field>
-      <field name="model">empresas.empresas</field>
+    <!-- Vista de arbol de company -->
+    <record model="ir.ui.view" id="empresas.tree">
+      <field name="name">Lista de empresas</field>
+      <field name="model">empresas.company</field>
       <field name="arch" type="xml">
-        <tree>
+        <tree string="Lista de empresas">
           <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
+          <field name="cif"/>
+          <field name="phone"/>
+          <field name="email"/>
         </tree>
       </field>
     </record>
--->
 
-    <!-- actions opening views on models -->
-<!--
-    <record model="ir.actions.act_window" id="empresas.action_window">
-      <field name="name">empresas window</field>
-      <field name="res_model">empresas.empresas</field>
-      <field name="view_mode">tree,form</field>
+    <!-- Vista formulario de company -->
+    <record model="ir.ui.view" id="empresas.form">
+      <field name="name">Formulario de empresas</field>
+      <field name="model">empresas.company</field>
+      <field name="arch" type="xml">
+        <form string="Formulario de empresas">
+          <group string="Formulario de empresas">
+            <!-- Campo name con el estilo color rojo -->
+            <field name="name" style="color:red;"/>
+            <field name="cif"/>
+            <!-- Campo description con estilo que tenga el ancho limitado al 30% -->
+            <field name="description" style="width:30%;"/>
+            <field name="phone"/>
+            <field name="email"/>
+          </group>
+        </form>
+      </field>
     </record>
--->
+
+    <!-- Vista tipo graph de company -->
+    <record model="ir.ui.view" id="empresas.graph">
+      <field name="name">Grafico de empresas</field>
+      <field name="model">empresas.company</field>
+      <field name="arch" type="xml">
+        <graph string="Grafico de empresas">
+          <field name="name"/>
+          <field name="cif"/>
+          <field name="phone"/>
+          <field name="email"/>
+        </graph>
+      </field>
+    </record>
+
+    <!-- Vista pivot de company -->
+    <record model="ir.ui.view" id="empresas.pivot">
+      <field name="name">Pivot de empresas</field>
+      <field name="model">empresas.company</field>
+      <field name="arch" type="xml">
+        <pivot string="Pivot de empresas">
+          <field name="name"/>
+          <field name="cif"/>
+          <field name="phone"/>
+          <field name="email"/>
+        </pivot>
+      </field>
+    </record>
+
+    <!-- Vista tipo kanban de company -->
+    <record model="ir.ui.view" id="empresas.kanban">
+      <field name="name">Kanban de empresas</field>
+      <field name="model">empresas.company</field>
+      <field name="arch" type="xml">
+        <kanban string="Kanban de empresas">
+          <field name="name"/>
+          <field name="cif"/>
+          <field name="phone"/>
+          <field name="email"/>
+          <!-- Template para los kanban -->
+          <templates>
+            <t t-name="kanban-box">
+              <div class="oe_kanban_global_click">
+                <div class="oe_kanban_details">
+                  <strong><field name="name"/></strong>
+                  <div class="oe_kanban_content">
+                    <div class="oe_kanban_content_left">
+                      <div class="oe_kanban_content_left oe_kanban_content_cif">
+                        <field name="cif"/>
+                      </div>
+                      <div class="oe_kanban_content_left oe_kanban_content_phone">
+                        <field name="phone"/>
+                      </div>
+                      <div class="oe_kanban_content_left oe_kanban_content_email">
+                        <field name="email"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    
+
+
+
+    <!-- Vista tipo search de company -->
+    <record model="ir.ui.view" id="empresas.search">
+      <field name="name">Busqueda de empresas</field>
+      <field name="model">empresas.company</field>
+      <field name="arch" type="xml">
+        <search string="Busqueda de empresas">
+          <field name="name"/>
+          <field name="cif"/>
+          <field name="phone"/>
+          <field name="email"/>
+          <!-- Filtro para buscar correos que contengan @support -->
+          <filter string="Emails con @support" name="support" domain="[('email','ilike','@support')]"/>
+        </search>
+      </field>
+    </record>
+
+    <!-- Acciones abriendo las vistas del modelo company -->
+    <record model="ir.actions.act_window" id="empresas.action_window">
+      <field name="name">Empresas</field>
+      <field name="res_model">empresas.company</field>
+      <field name="view_mode">tree,form,graph,pivot,kanban,search</field>
+    </record>
+
+    <!-- Vista de arbol de empleados -->
+    <record model="ir.ui.view" id="empresas.tree_empleado">
+      <field name="name">Lista de empleados</field>
+      <field name="model">empresas.empleado</field>
+      <field name="arch" type="xml">
+        <tree string="Lista de empleados">
+          <field name="name"/>
+          <field name="dni"/>
+          <field name="phone"/>
+          <field name="email"/>
+          <field name="company_id"/>
+          <field name="fechaContratacion"/>
+          <field name="diasTrabajados"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Vista formulario de empleados -->
+    <record model="ir.ui.view" id="empresas.form_empleado">
+      <field name="name">Formulario de empleados</field>
+      <field name="model">empresas.empleado</field>
+      <field name="arch" type="xml">
+        <form string="Formulario de empleados">
+          <group style="width:50%; float:left;">
+            <field name="name"/>
+            <field name="dni"/>
+            <field name="description"/>
+          </group>
+          <!-- Un grupo pero alineado a la derecha del primero y con ancho de 50% -->
+          <group style="float:right; width:50%;">
+            <field name="phone"/>
+            <field name="email"/>
+            <field name="company_id"/>
+            <field name="fechaContratacion"/>
+            <field name="diasTrabajados"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- Vista de tipo seach de empleado -->
+    <record model="ir.ui.view" id="empresas.search_empleado">
+      <field name="name">Busqueda de empleados</field>
+      <field name="model">empresas.empleado</field>
+      <field name="arch" type="xml">
+        <search string="Busqueda de empleados">
+          <field name="name"/>
+          <field name="dni"/>
+          <field name="phone"/>
+          <field name="email"/>
+          <field name="company_id"/>
+          <!-- Filtro para buscar dni con la letra A -->
+          <filter string="DNI con letra A" name="dni_a" domain="[('dni','ilike','A')]"/>
+          <!-- Filtro para buscar email distinto de gmail -->
+          <filter string="Email distinto de gmail" name="email_gmail" domain="[('email','not ilike','@gmail')]"/>
+        </search>
+      </field>
+    </record>
+
+    <!-- Acciones abriendo las vistas del modelo empleado -->
+    <record model="ir.actions.act_window" id="empresas.action_window_empleado">
+      <field name="name">Empleados</field>
+      <field name="res_model">empresas.empleado</field>
+      <field name="view_mode">tree,form,search</field>
+    </record>
+
+    <!-- Vista de arbol de cliente -->
+    <record model="ir.ui.view" id="empresas.tree_empleado">
+      <field name="name">Lista de clientes</field>
+      <field name="model">empresas.cliente</field>
+      <field name="arch" type="xml">
+        <tree string="Lista de clientes">
+          <field name="name"/>
+          <field name="cif"/>
+          <field name="phone"/>
+          <field name="email"/>
+          <field name="company_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Vista formulario de cliente -->
+    <record model="ir.ui.view" id="empresas.form_empleado">
+      <field name="name">Formulario de clientes</field>
+      <field name="model">empresas.cliente</field>
+      <field name="arch" type="xml">
+        <form string="Formulario de clientes">
+        <!-- Grupo que engloba a ambos con el titulo -->
+        <group string="Formulario de Clientes" style="color:green;">
+          <group style="width:50%; float:left;">
+            <field name="name"/>
+            <field name="cif"/>
+            <field name="description"/>
+          </group>
+          <!-- Un grupo pero alineado a la derecha del primero y con ancho de 50% -->
+          <group style="float:right; width:50%;">
+            <field name="phone"/>
+            <field name="email"/>
+            <field name="company_id"/>
+          </group>
+        </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- Vista de tipo seach de cliente -->
+    <record model="ir.ui.view" id="empresas.search_empleado">
+      <field name="name">Busqueda de clientes</field>
+      <field name="model">empresas.cliente</field>
+      <field name="arch" type="xml">
+        <search string="Busqueda de clientes">
+          <field name="name"/>
+          <field name="cif"/>
+          <field name="phone"/>
+          <field name="email"/>
+          <field name="company_id"/>
+          <!-- Filtro para buscar cif con la letra T y pertenezca a una compañia de id 1 -->
+          <filter string="CIF con T y compañia 1" name="cif_t" domain="[('cif','ilike','T'),('company_id','=',1)]"/>
+          <!-- Filtro para buscar o bien telefonos que terminan en 777 o tengan en su email @gmail -->
+          <filter string="Teléfono 777 o gmail" name="phone_777" domain="['|', ('phone','ilike','777'),('email','ilike','@gmail')]"/>
+        </search>
+      </field>
+    </record>
+
+    <!-- Acciones abriendo las vistas del modelo cliente -->
+    <record model="ir.actions.act_window" id="empresas.action_window_cliente">
+      <field name="name">Listado de Clientes</field>
+      <field name="res_model">empresas.cliente</field>
+      <field name="view_mode">tree,form,search</field>
+    </record>
+
 
     <!-- server action to the one above -->
-<!--
+    <!--
     <record model="ir.actions.server" id="empresas.action_server">
       <field name="name">empresas server</field>
       <field name="model_id" ref="model_empresas_empresas"/>
@@ -40,21 +273,15 @@
     </record>
 -->
 
-    <!-- Top menu item -->
-<!--
-    <menuitem name="empresas" id="empresas.menu_root"/>
--->
-    <!-- menu categories -->
-<!--
-    <menuitem name="Menu 1" id="empresas.menu_1" parent="empresas.menu_root"/>
-    <menuitem name="Menu 2" id="empresas.menu_2" parent="empresas.menu_root"/>
--->
-    <!-- actions -->
-<!--
-    <menuitem name="List" id="empresas.menu_1_list" parent="empresas.menu_1"
-              action="empresas.action_window"/>
-    <menuitem name="Server to list" id="empresas" parent="empresas.menu_2"
-              action="empresas.action_server"/>
--->
+    <!-- Item del menu al top -->
+    <menuitem name="Empresas" id="empresas.menu_root"/>
+
+    <!-- Categorias del menu -->
+    <menuitem name="Menu Empresas" id="empresas.menu_1" parent="empresas.menu_root"/>
+    
+    <!-- Acciones -->
+    <menuitem name="Listado de Empresas" id="empresas.menu_1_list" parent="empresas.menu_1" action="empresas.action_window"/>
+    <menuitem name="Listado de Empleados" id="empresas.menu_1_list_empleado" parent="empresas.menu_1" action="empresas.action_window_empleado"/>
+    <menuitem name="Listado de Clientes" id="empresas.menu_1_list_cliente" parent="empresas.menu_1" action="empresas.action_window_cliente"/>
   </data>
 </odoo>
